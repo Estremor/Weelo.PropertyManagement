@@ -25,6 +25,13 @@ namespace Weelo.PropertyManagement.Aplication.Automapper
 
             CreateMap<PropertyDataDto, Property>()
                 .ForMember(x => x.IdOwner, src => src.Ignore());
+
+            CreateMap<PropertyReadDto, Property>();
+            CreateMap<Property, PropertyReadDto>();
+
+            CreateMap<PropertyTraceDto, Property>();
+            CreateMap<PropertyTraceDto, PropertyTrace>().ForMember(x => x.Value, src => src.MapFrom(d => d.Value == null || d.Value <= 0 ? d.Price : d.Value));
+
             #endregion
 
             #region PropertyImage

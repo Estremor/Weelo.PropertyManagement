@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Weelo.PropertyManagement.Aplication.Dtos
+﻿namespace Weelo.PropertyManagement.Aplication.Dtos
 {
     public class PropertyTraceDto
     {
+        /// <summary>
+        /// Codigo interno de la propiedad
+        /// </summary>
+        public string CodeInternal { get; set; }
         /// <summary>
         /// Nombre de la propiedad
         /// </summary>

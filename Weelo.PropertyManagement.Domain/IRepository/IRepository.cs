@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 namespace Weelo.PropertyManagement.Domain.IRepository
@@ -57,6 +58,8 @@ namespace Weelo.PropertyManagement.Domain.IRepository
         /// <returns>Enumeración de entidades resultado</returns>
         /// <param name="properties">Rutas a las propiedades a incluir como agregados</param>
         ICollection<TEntity> ListInclude(Expression<Func<TEntity, bool>> expression, params string[] properties);
+
+        IQueryable<TEntity> ListByQuery();
 
         /// <summary>
         /// Inserta una nueva entidad en el repositorio de datos de forma asíncrona

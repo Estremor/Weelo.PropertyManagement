@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Domain.Base.Contract;
 
@@ -12,6 +8,9 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService.Contract
     {
         #region Contarct
         void SaveProperty(PropertyDataDto propertyDto);
+        void UpdateProperty(PropertyTraceDto traceDto);
+        void UpdatePrice(PriceDto priceDto);
+        IQueryable<PropertyReadDto> List();
         #endregion
     }
 }

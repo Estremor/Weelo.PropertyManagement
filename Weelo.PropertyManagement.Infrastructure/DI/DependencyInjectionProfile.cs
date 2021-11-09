@@ -1,5 +1,4 @@
-﻿using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Weelo.PropertyManagement.Aplication.AplicationService;
@@ -57,6 +56,7 @@ namespace Weelo.PropertyManagement.Infrastructure.DI
             services.AddTransient<IOwnerAppService, OwnerAppService>();
             services.AddTransient<ILoginAppService, LoginAppService>();
             services.AddTransient<IPropertyAppService, PropertyAppService>();
+            services.AddTransient<IPropertyImageAppService, PropertyImageAppService>();
             #endregion
 
             #region Domain
@@ -64,6 +64,7 @@ namespace Weelo.PropertyManagement.Infrastructure.DI
             services.AddTransient<ILoginDomainService, LoginDomainService>();
             services.AddTransient<IPropertyDomainService, PropertyDomainService>();
             services.AddTransient<IPropertyImageDomainService, PropertyImageDomainService>();
+            services.AddTransient<IPropertyTraceDomainService, PropertyTraceDomainService>();
             #endregion
         }
     }

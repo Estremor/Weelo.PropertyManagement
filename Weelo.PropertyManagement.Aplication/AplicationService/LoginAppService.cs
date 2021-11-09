@@ -21,7 +21,7 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
             _loginDomainService = Context.GetDomainService<ILoginDomainService>();
         }
         #endregion
-
+        #region Methods
         public UserDto LoginUser(string userName, string password)
         {
             User userResult = _loginDomainService.FindUser(new User { UserName = userName, Password = password });
@@ -34,6 +34,7 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
                 };
             }
             throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = "Usuario no encontrado" });
-        }
+        } 
+        #endregion
     }
 }

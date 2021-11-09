@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.Entities;

@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Weelo.PropertyManagement.Api.Controllers
 {
@@ -28,6 +22,7 @@ namespace Weelo.PropertyManagement.Api.Controllers
         }
         #endregion
 
+        #region Methods
         // GET api/<LoginController>/5
         [HttpGet]
         [Route(nameof(Get))]
@@ -35,7 +30,8 @@ namespace Weelo.PropertyManagement.Api.Controllers
         public UserDto Get(string userName, string password)
         {
             return _loginAppService.LoginUser(userName, password);
-        }
+        } 
+        #endregion
 
     }
 }

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Weelo.PropertyManagement.Infrastructure\Weelo.PropertyManagement.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ApiValidator\" />
-  </ItemGroup>
-
 </Project>

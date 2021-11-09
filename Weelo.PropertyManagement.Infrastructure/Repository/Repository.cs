@@ -115,6 +115,15 @@ namespace Weelo.PropertyManagement.Infrastructure.Repository
         }
 
         /// <summary>
+        /// Lista todas las entidades y/o ejecuta la sentencia direecta en la bd
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<TEntity> ListByQuery()
+        {
+            return Entity;
+        }
+
+        /// <summary>
         /// Inserta una nueva entidad en el repositorio de datos de forma asíncrona
         /// </summary>
         /// <param name="entity">Entidad a insertar</param>

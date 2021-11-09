@@ -20,12 +20,14 @@ namespace Weelo.PropertyManagement.Domain.Services
             _propertyRepo = propertyRepo;
         }
         #endregion
+        #region Methods
         public RequestResultType SaveImage(PropertyImage image)
         {
             var propertyResult = _propertyRepo.Entity.Find(image.IdProperty);
             if (propertyResult == null) return RequestResultType.ErrorResul;
             _imageRepo.Insert(image);
             return RequestResultType.SuccessResult;
-        }
+        } 
+        #endregion
     }
 }

@@ -25,6 +25,7 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         }
         #endregion
 
+        #region Methods
         public void Save(OwnerDto ownerDto)
         {
             Owner owner = _mapper.Map<Owner>(ownerDto);
@@ -35,6 +36,7 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
             if (result == RequestResultType.ErrorResul)
                 throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error intentalo nuevamente" });
             Context.SaveChanges();
-        }
+        } 
+        #endregion
     }
 }

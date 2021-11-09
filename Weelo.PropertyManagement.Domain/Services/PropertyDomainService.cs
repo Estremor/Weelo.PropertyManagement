@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Weelo.PropertyManagement.Domain.Base;
+using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
@@ -10,14 +10,14 @@ namespace Weelo.PropertyManagement.Domain.Services
     public class PropertyDomainService : DomainService, IPropertyDomainService
     {
         #region Fileds
-        private readonly IRepository<Property> _PropertyRepo;
+        private readonly IRepository<Property> _propertyRepo;
         private readonly IRepository<Owner> _ownerRepo;
         #endregion
 
         #region C'tor
         public PropertyDomainService(IRepository<Property> propertyRepo, IRepository<Owner> ownerRepo)
         {
-            _PropertyRepo = propertyRepo;
+            _propertyRepo = propertyRepo;
             _ownerRepo = ownerRepo;
         }
         #endregion
@@ -25,7 +25,7 @@ namespace Weelo.PropertyManagement.Domain.Services
         #region Method
         public Property Save(Property property)
         {
-            Property entityResult = _PropertyRepo.List(p => p.CodeInternal.Equals(property.CodeInternal)).FirstOrDefault();
+            Property entityResult = _propertyRepo.List(p => p.CodeInternal.Equals(property.CodeInternal)).FirstOrDefault();
             if (entityResult is not null)
             {
                 return null;
@@ -36,23 +36,36 @@ namespace Weelo.PropertyManagement.Domain.Services
                 return null;
             }
             property.IdOwner = ownerResult.IdOwner;
-            Property resultSave = _PropertyRepo.Insert(property);
+            Property resultSave = _propertyRepo.Insert(property);
             return resultSave;
         }
 
-        public Property UpdateProperty(Guid id, Property property)
+        public Property UpdateProperty(Property property)
         {
-            Property propertyEnity = _PropertyRepo.Entity.Find(id);
+            Property propertyEnity = _propertyRepo.List(x => x.CodeInternal == property.CodeInternal).FirstOrDefault();
             if (propertyEnity is not null)
             {
-                propertyEnity.Address = property.Address;
-                propertyEnity.IdOwner = property.IdOwner;
-                propertyEnity.Name = property.Name;
-                propertyEnity.Price = property.Price;
-                propertyEnity.Year = property.Year;
-                return _PropertyRepo.Insert(propertyEnity);
+                if (_ownerRepo.Entity.Find(property.IdOwner) != null)
+                {
+                    propertyEnity.Address = property.Address;
+                    propertyEnity.IdOwner = property.IdOwner;
+                    propertyEnity.Name = property.Name;
+                    propertyEnity.Price = property.Price;
+                    propertyEnity.Year = property.Year;
+                    return _propertyRepo.Update(propertyEnity);
+                }
             }
             return null;
+        }
+
+        public RequestResultType UpdatePrice(Property property)
+        {
+            Property prop = _propertyRepo.List(x => x.CodeInternal == property.CodeInternal).FirstOrDefault();
+            if (prop == null)
+                return RequestResultType.ErrorResul;
+            prop.Price = property.Price;
+            _propertyRepo.Update(prop);
+            return RequestResultType.SuccessResult;
         }
         #endregion
     }

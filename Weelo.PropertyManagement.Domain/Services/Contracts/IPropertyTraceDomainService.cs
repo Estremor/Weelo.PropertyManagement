@@ -4,10 +4,10 @@ using Weelo.PropertyManagement.Domain.Entities;
 
 namespace Weelo.PropertyManagement.Domain.Services.Contracts
 {
-    public interface IPropertyImageDomainService : IDomainService
+    public interface IPropertyTraceDomainService : IDomainService
     {
         #region Contract
-        RequestResultType SaveImage(PropertyImage image);
+        RequestResultType RegisterTrace(PropertyTrace trace);
         #endregion
     }
 }
