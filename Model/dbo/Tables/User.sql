@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[User] (
+    [IdUser]   UNIQUEIDENTIFIER NOT NULL,
+    [UserName] VARCHAR (50)     NOT NULL,
+    [Password] NVARCHAR (MAX)   NOT NULL,
+    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([IdUser] ASC)
+);
+

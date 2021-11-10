@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Api.Filters;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
@@ -23,21 +23,15 @@ namespace Weelo.PropertyManagement.Api.Controllers
         #endregion
 
         #region Methods
-        // GET: api/<OwnerController>
-        [Authorize]
-        [HttpGet]
-        public IEnumerable<OwnerDto> Get()
-        {
-            return new List<OwnerDto>();
-        }
 
         // POST api/<OwnerController>
         [HttpPost]
         [Authorize]
         [CustomValidation]
-        public void Post(OwnerDto owner)
+        public async Task<IActionResult> Post(OwnerDto owner)
         {
-            _ownerAppService.Save(owner);
+            await _ownerAppService.SaveAsync(owner);
+            return Ok();
         }
         #endregion
     }

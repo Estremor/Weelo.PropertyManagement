@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+﻿using System;
 using Newtonsoft.Json;
-using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Weelo.PropertyManagement.Aplication.Errors;
 
 namespace Weelo.PropertyManagement.Infrastructure.Middleware

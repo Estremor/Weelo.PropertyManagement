@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
 
@@ -27,10 +28,10 @@ namespace Weelo.PropertyManagement.Api.Controllers
         [HttpGet]
         [Route(nameof(Get))]
         [AllowAnonymous]
-        public UserDto Get(string userName, string password)
+        public async Task<UserDto> Get(string userName, string password)
         {
-            return _loginAppService.LoginUser(userName, password);
-        } 
+            return await _loginAppService.LoginUserAsync(userName, password);
+        }
         #endregion
 
     }

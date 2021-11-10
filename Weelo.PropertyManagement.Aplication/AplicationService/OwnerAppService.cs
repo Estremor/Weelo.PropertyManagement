@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Aplication.Errors;
@@ -26,16 +27,16 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         #endregion
 
         #region Methods
-        public void Save(OwnerDto ownerDto)
+        public async Task SaveAsync(OwnerDto ownerDto)
         {
             Owner owner = _mapper.Map<Owner>(ownerDto);
-            var result = _ownerDomainService.Save(owner);
+            var result = await _ownerDomainService.SaveAsync(owner);
 
             if (result == RequestResultType.AlreadyExistObjectResult)
                 throw new RestException(System.Net.HttpStatusCode.AlreadyReported, new { Messages = "Propietario ya existe" });
             if (result == RequestResultType.ErrorResul)
                 throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error intentalo nuevamente" });
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         } 
         #endregion
     }

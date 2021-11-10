@@ -1,9 +1,10 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.IRepository;
@@ -27,9 +28,9 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Methods
-        public User FindUser(User user)
+        public async Task<User> FindUserAsync(User user)
         {
-            var userEntity = _userRepository.List(x => x.UserName == user.UserName && x.Password == user.Password);
+            var userEntity = await _userRepository.ListAsync(x => x.UserName == user.UserName && x.Password == user.Password);
             return userEntity.FirstOrDefault();
         }
 

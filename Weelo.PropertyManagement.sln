@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Models", "1 - Models", "{A9F2E2F3-C14B-4C10-B526-64D9C655BB6F}"
 EndProject
@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weelo.PropertyManagement.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weelo.PropertyManagement.Aplication", "Weelo.PropertyManagement.Aplication\Weelo.PropertyManagement.Aplication.csproj", "{0E22842E-24D5-458E-92D8-F8DD0C0D19FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeelo.Property", "TestWeelo.Property\TestWeelo.Property.csproj", "{46AC0DDB-3A2B-4549-8705-827213FEF714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWeelo.Property", "TestWeelo.Property\TestWeelo.Property.csproj", "{46AC0DDB-3A2B-4549-8705-827213FEF714}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Model", "Model\Model.sqlproj", "{2D580680-57B1-4EAD-B4B3-BFE9376897D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,12 @@ Global
 		{46AC0DDB-3A2B-4549-8705-827213FEF714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46AC0DDB-3A2B-4549-8705-827213FEF714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46AC0DDB-3A2B-4549-8705-827213FEF714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,7 @@ Global
 		{5C36943C-06F8-45A9-A718-4C8864150122} = {4C01AA05-E699-4FF0-A07A-E9B8D4259145}
 		{0E22842E-24D5-458E-92D8-F8DD0C0D19FE} = {72E63D38-E88B-40B6-8B63-DD78C49B79F6}
 		{46AC0DDB-3A2B-4549-8705-827213FEF714} = {17D7EEB8-1EA7-49A3-8B33-1134203F1012}
+		{2D580680-57B1-4EAD-B4B3-BFE9376897D2} = {A9F2E2F3-C14B-4C10-B526-64D9C655BB6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BAC73F5-8C79-41A0-8DCD-DC47CD4BDB0F}

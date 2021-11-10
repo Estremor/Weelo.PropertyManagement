@@ -72,7 +72,6 @@ namespace Weelo.PropertyManagement.Api
             if (env.IsDevelopment())
             {
                 app.UseMiddleware<ErrorHandlingMiddleware>();
-                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Weelo.PropertyManagement.Api v1"));
             }

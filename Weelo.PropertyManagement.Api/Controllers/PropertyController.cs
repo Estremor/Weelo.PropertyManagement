@@ -3,6 +3,7 @@ using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Api.Filters;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
@@ -38,28 +39,30 @@ namespace Weelo.PropertyManagement.Api.Controllers
         [HttpPost]
         [Authorize]
         [CustomValidation]
-        public void Post(PropertyDataDto propertyData)
+        public async Task<IActionResult> Post(PropertyDataDto propertyData)
         {
-            _propertyAppService.SaveProperty(propertyData);
+            await _propertyAppService.SavePropertyAsync(propertyData);
+            return Ok(propertyData);
         }
 
         // PUT api/<PropertyController>/5
         [HttpPut]
         [Authorize]
         [CustomValidation]
-        public void Put(PropertyTraceDto propertyTrace)
+        public async Task<IActionResult> Put(PropertyTraceDto propertyTrace)
         {
-            _propertyAppService.UpdateProperty(propertyTrace);
+            await _propertyAppService.UpdatePropertyAsync(propertyTrace);
+            return Ok();
         }
 
         [HttpPatch]
         [Authorize]
         [CustomValidation]
-        public IActionResult UpdatePrice(PriceDto priceDto)
+        public async Task<IActionResult> UpdatePrice(PriceDto priceDto)
         {
-            _propertyAppService.UpdatePrice(priceDto);
+            await _propertyAppService.UpdatePriceAsync(priceDto);
             return Ok();
-        } 
+        }
         #endregion
     }
 }

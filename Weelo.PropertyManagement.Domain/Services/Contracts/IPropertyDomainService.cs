@@ -1,15 +1,16 @@
-﻿using Weelo.PropertyManagement.Domain.Base.Contract;
-using Weelo.PropertyManagement.Domain.Base.Enum;
+﻿using System.Threading.Tasks;
 using Weelo.PropertyManagement.Domain.Entities;
+using Weelo.PropertyManagement.Domain.Base.Enum;
+using Weelo.PropertyManagement.Domain.Base.Contract;
 
 namespace Weelo.PropertyManagement.Domain.Services.Contracts
 {
     public interface IPropertyDomainService : IDomainService
     {
         #region Contract
-        Property Save(Property property);
-        Property UpdateProperty(Property property);
-        RequestResultType UpdatePrice(Property property);
+        Task<Property> SaveAsync(Property property);
+        Task<Property> UpdatePropertyAsync(Property property);
+        Task<RequestResultType> UpdatePriceAsync(Property property);
         #endregion
     }
 }

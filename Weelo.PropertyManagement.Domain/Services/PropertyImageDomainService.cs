@@ -1,6 +1,7 @@
-﻿using Weelo.PropertyManagement.Domain.Base;
-using Weelo.PropertyManagement.Domain.Base.Enum;
+﻿using System.Threading.Tasks;
+using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Entities;
+using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
 
@@ -20,14 +21,15 @@ namespace Weelo.PropertyManagement.Domain.Services
             _propertyRepo = propertyRepo;
         }
         #endregion
+
         #region Methods
-        public RequestResultType SaveImage(PropertyImage image)
+        public async Task<RequestResultType> SaveImageAsync(PropertyImage image)
         {
             var propertyResult = _propertyRepo.Entity.Find(image.IdProperty);
             if (propertyResult == null) return RequestResultType.ErrorResul;
-            _imageRepo.Insert(image);
+            await _imageRepo.InsertAsync(image);
             return RequestResultType.SuccessResult;
-        } 
+        }
         #endregion
     }
 }

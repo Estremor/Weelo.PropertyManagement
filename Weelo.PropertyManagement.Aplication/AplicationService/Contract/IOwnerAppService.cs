@@ -1,4 +1,5 @@
-﻿using Weelo.PropertyManagement.Aplication.Dtos;
+﻿using System.Threading.Tasks;
+using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Domain.Base.Contract;
 
 namespace Weelo.PropertyManagement.Aplication.AplicationService.Contract
@@ -6,7 +7,7 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService.Contract
     public interface IOwnerAppService : IAppService
     {
         #region Contract
-        void Save(OwnerDto owner);
+        Task SaveAsync(OwnerDto owner);
         #endregion
     }
 }

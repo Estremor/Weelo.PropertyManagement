@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.IdentityModel.Tokens;
+using Weelo.PropertyManagement.Domain.Base;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+using Weelo.PropertyManagement.Domain.Services;
+using Weelo.PropertyManagement.Domain.IRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Weelo.PropertyManagement.Infrastructure.Repository;
+using Weelo.PropertyManagement.Domain.Services.Contracts;
 using Weelo.PropertyManagement.Aplication.AplicationService;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
-using Weelo.PropertyManagement.Domain.Base;
-using Weelo.PropertyManagement.Domain.IRepository;
-using Weelo.PropertyManagement.Domain.Services;
-using Weelo.PropertyManagement.Domain.Services.Contracts;
-using Weelo.PropertyManagement.Infrastructure.Repository;
 
 namespace Weelo.PropertyManagement.Infrastructure.DI
 {

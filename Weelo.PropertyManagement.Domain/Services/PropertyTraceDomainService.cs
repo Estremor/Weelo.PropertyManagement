@@ -1,6 +1,6 @@
 ﻿using Weelo.PropertyManagement.Domain.Base;
-using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.Entities;
+using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
 

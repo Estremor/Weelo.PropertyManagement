@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Weelo.PropertyManagement.Domain.Base.Contract;
 
 namespace Weelo.PropertyManagement.Domain.Base

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Api.Filters;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
@@ -26,10 +27,10 @@ namespace Weelo.PropertyManagement.Api.Controllers
         [HttpPost]
         [Authorize]
         [CustomValidation]
-        public void Post(ImageDto image)
+        public async Task Post(ImageDto image)
         {
-            _imageAppService.AddImgeToProperty(image);
-        } 
+            await _imageAppService.AddImgeToPropertyAsync(image);
+        }
         #endregion
     }
 }

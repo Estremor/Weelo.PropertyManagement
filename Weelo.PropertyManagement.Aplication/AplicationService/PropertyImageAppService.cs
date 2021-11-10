@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Aplication.Errors;
@@ -26,12 +27,13 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         #endregion
 
         #region Methods
-        public void AddImgeToProperty(ImageDto image)
+        public async Task AddImgeToPropertyAsync(ImageDto image)
         {
             PropertyImage entity = _mapper.Map<PropertyImage>(image);
-            RequestResultType result = _propertyImageDomainServ.SaveImage(entity);
+            RequestResultType result = await _propertyImageDomainServ.SaveImageAsync(entity);
             if (result == RequestResultType.ErrorResul)
                 throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error al guardar la imagen intentalo nuevamente" });
+            await Context.SaveChangesAsync();
         }
         #endregion
     }

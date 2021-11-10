@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Aplication.Errors;
@@ -45,11 +46,11 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         #endregion
 
         #region Methods
-        public void SaveProperty(PropertyDataDto propertyDto)
+        public async Task SavePropertyAsync(PropertyDataDto propertyDto)
         {
             Property property = _mapper.Map<Property>(propertyDto);
             property.IdOwner = _ownerRepo.Entity.FirstOrDefault(o => o.Document == propertyDto.OwnerDocument)?.IdOwner ?? Guid.Empty;
-            property = _propertyDomainServ.Save(property);
+            property = await _propertyDomainServ.SaveAsync(property);
             if (property == null)
             {
                 throw new RestException(System.Net.HttpStatusCode.AlreadyReported, new { Messages = "Ocurrio un error al guardar las propiedad intentalo nuevamente" });
@@ -60,21 +61,20 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
             foreach (PropertyImage item in images)
             {
                 item.IdProperty = property.IdProperty;
-                RequestResultType result = _propertyImageDomainServ.SaveImage(item);
+                RequestResultType result = await _propertyImageDomainServ.SaveImageAsync(item);
                 if (result == RequestResultType.ErrorResul)
                 {
                     throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error al guardar las imagenes intentalo nuevamente" });
                 }
             }
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
-
-        public void UpdateProperty(PropertyTraceDto traceDto)
+        public async Task UpdatePropertyAsync(PropertyTraceDto traceDto)
         {
             //mapeamos la entidad property y buscamos el id
             Property property = _mapper.Map<Property>(traceDto);
             property.IdOwner = _ownerRepo.List(x => x.Document == traceDto.OwnerDocument).FirstOrDefault()?.IdOwner ?? Guid.Empty;
-            property = _propertyDomainServ.UpdateProperty(property);
+            property = await _propertyDomainServ.UpdatePropertyAsync(property);
             if (property is null)
             {
                 throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error al actualizar la propiedad, intentalo nuevamente" });
@@ -96,15 +96,21 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
                 throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = "Ocurrio un error al realizar la actualizacion" });
             }
 
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
-        public void UpdatePrice(PriceDto priceDto)
+        public async Task UpdatePriceAsync(PriceDto priceDto)
         {
-            var result = _propertyDomainServ.UpdatePrice(new Property { CodeInternal = priceDto.InernalCode, Price = priceDto.Price });
+            var result = await _propertyDomainServ.UpdatePriceAsync(new Property { CodeInternal = priceDto.InernalCode, Price = priceDto.Price });
             if (result == RequestResultType.ErrorResul)
                 throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = $"Ocurrio un error al realizar la actualizacion del precio, el codigo {priceDto.InernalCode} no existe" });
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Utilizamos Odata protocolo injectamos el repository directo a la capa de aplicacion 
+        /// por que no manejamos logica de negocio
+        /// </summary>
+        /// <returns>entidades segun los filtros</returns>
         public IQueryable<PropertyReadDto> List()
         {
             var result = _propertyRepo.ListByQuery();
