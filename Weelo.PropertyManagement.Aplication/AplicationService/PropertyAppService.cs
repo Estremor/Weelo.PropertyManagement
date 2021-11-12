@@ -1,18 +1,17 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
+using AutoMapper;
+using System.Linq;
 using System.Threading.Tasks;
-using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Weelo.PropertyManagement.Domain.Base;
+using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Aplication.Errors;
-using Weelo.PropertyManagement.Domain.Base;
-using Weelo.PropertyManagement.Domain.Base.Enum;
-using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
+using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace Weelo.PropertyManagement.Aplication.AplicationService
 {

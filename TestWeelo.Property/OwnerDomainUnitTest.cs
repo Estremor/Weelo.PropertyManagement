@@ -2,11 +2,10 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Services;
 using Weelo.PropertyManagement.Domain.Entities;
-using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.IRepository;
-using Weelo.PropertyManagement.Domain.Base;
 
 namespace TestWeelo.Property
 {

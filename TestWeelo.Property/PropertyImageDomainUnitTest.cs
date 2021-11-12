@@ -1,13 +1,10 @@
 ﻿using Moq;
-using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using NUnit.Framework;
 using System.Threading.Tasks;
-using entity = Weelo.PropertyManagement.Domain.Entities;
-using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services;
+using Weelo.PropertyManagement.Domain.IRepository;
+using entity = Weelo.PropertyManagement.Domain.Entities;
 
 namespace TestWeelo.Property
 {

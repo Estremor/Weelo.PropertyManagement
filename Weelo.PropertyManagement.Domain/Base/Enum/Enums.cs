@@ -10,11 +10,4 @@
         /// </summary>
         SqlServer,
     }
-
-    public enum RequestResultType
-    {
-        ErrorResul = 1,
-        SuccessResult = 2,
-        AlreadyExistObjectResult = 3,
-    }
 }

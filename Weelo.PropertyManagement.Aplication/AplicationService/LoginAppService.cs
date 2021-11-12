@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
-using Weelo.PropertyManagement.Aplication.Dtos;
-using Weelo.PropertyManagement.Aplication.Errors;
 using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Entities;
+using Weelo.PropertyManagement.Aplication.Dtos;
+using Weelo.PropertyManagement.Aplication.Errors;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
+using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace Weelo.PropertyManagement.Aplication.AplicationService
 {

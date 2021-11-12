@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using System;
+﻿using System;
+using FluentValidation;
 using System.Collections.Generic;
 using Weelo.PropertyManagement.Aplication.Dtos;
 

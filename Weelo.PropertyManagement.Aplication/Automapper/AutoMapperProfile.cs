@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
+using AutoMapper;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Domain.Entities;
 using static Weelo.PropertyManagement.Aplication.Dtos.PropertyDataDto;

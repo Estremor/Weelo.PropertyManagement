@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Routing;
-using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Weelo.PropertyManagement.Api.Filters;
-using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
+using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace Weelo.PropertyManagement.Api.Controllers
 {

@@ -9,6 +9,10 @@
         /// <summary>
         /// Codigo interno de la propiedad
         /// </summary>
-        public string PropertyCode { get; set; }
+        public string InernalCode { get; set; }
+        /// <summary>
+        /// stado activo / inactivo
+        /// </summary>
+        public bool Enabled { get; set; }
     }
 }

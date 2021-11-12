@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Moq;
-using NUnit.Framework;
+﻿using Moq;
 using System;
+using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Api.Controllers;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
-using Weelo.PropertyManagement.Aplication.Dtos;
 
 namespace TestWeelo.Property
 {

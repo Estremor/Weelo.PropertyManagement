@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using System;
+﻿using System;
+using FluentValidation;
 using Weelo.PropertyManagement.Aplication.Dtos;
 
 namespace Weelo.PropertyManagement.Api.ModelState

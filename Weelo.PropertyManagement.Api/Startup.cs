@@ -1,20 +1,22 @@
-using FluentValidation.AspNetCore;
-using Microsoft.AspNet.OData.Builder;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.Extensions.Configuration;
 using Weelo.PropertyManagement.Api.ModelState;
+using Microsoft.Extensions.DependencyInjection;
 using Weelo.PropertyManagement.Aplication.Dtos;
-using Weelo.PropertyManagement.Infrastructure.Base;
 using Weelo.PropertyManagement.Infrastructure.DI;
+using Weelo.PropertyManagement.Infrastructure.Base;
 using Weelo.PropertyManagement.Infrastructure.Middleware;
-
+using System.Linq;
+using Microsoft.AspNet.OData.Formatter;
+using Microsoft.Net.Http.Headers;
 
 namespace Weelo.PropertyManagement.Api
 {
@@ -60,6 +62,7 @@ namespace Weelo.PropertyManagement.Api
             });
             #endregion
 
+            AddFormatters(services);
             var dbSettings = new DbSettings();
             Configuration.Bind("DbSetting", dbSettings);
             services.AddSingleton(dbSettings);
@@ -88,6 +91,22 @@ namespace Weelo.PropertyManagement.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+        }
+
+        private void AddFormatters(IServiceCollection services)
+        {
+            services.AddMvcCore(option =>
+            {
+                foreach (var outputFormatter in option.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+
+                foreach (var inputFormatter in option.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
             });
         }
     }

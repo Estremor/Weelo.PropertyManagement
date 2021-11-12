@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Weelo.PropertyManagement.Api.Filters;
-using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
+using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace Weelo.PropertyManagement.Api.Controllers
 {
