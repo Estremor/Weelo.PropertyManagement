@@ -42,7 +42,7 @@ namespace Weelo.PropertyManagement.Api.Controllers
         public async Task<IActionResult> Post(PropertyDataDto propertyData)
         {
             await _propertyAppService.SavePropertyAsync(propertyData);
-            return Ok(propertyData);
+            return Ok();
         }
 
         // PUT api/<PropertyController>/5

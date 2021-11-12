@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.Base.Contract;
+using Weelo.PropertyManagement.Domain.Base;
 
 namespace Weelo.PropertyManagement.Domain.Services.Contracts
 {
@@ -12,7 +13,7 @@ namespace Weelo.PropertyManagement.Domain.Services.Contracts
         /// </summary>
         /// <param name="user"></param>
         /// <returns>usuario</returns>
-        Task<User> FindUserAsync(User user);
+        Task<ActionResult> FindUserAsync(User user);
         /// <summary>
         /// Crea token para autenticación
         /// </summary>

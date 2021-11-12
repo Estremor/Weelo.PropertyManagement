@@ -7,6 +7,7 @@ using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace TestWeelo.Property
 {
+    [TestFixture]
     public class Tests
     {
         [SetUp]
@@ -22,7 +23,7 @@ namespace TestWeelo.Property
             string password = "123";
             mock.Setup(sp => sp.LoginUserAsync(userName, password)).Returns(Task.FromResult(new UserDto { Token = "", UserName = "test" }));
 
-            LoginController controller = new LoginController(mock.Object);
+            LoginController controller = new(mock.Object);
             var dto = await controller.Get(userName, password);
 
             Assert.IsTrue(string.IsNullOrWhiteSpace(dto.Token), "usuario se pudo loguear con datos errados");
@@ -35,7 +36,7 @@ namespace TestWeelo.Property
             string password = "123";
             mock.Setup(sp => sp.LoginUserAsync(userName, password)).Returns(Task.FromResult(new UserDto { Token = "ste es mi token", UserName = "test" }));
 
-            LoginController controller = new LoginController(mock.Object);
+            LoginController controller = new(mock.Object);
             var dto = await controller.Get(userName, password);
 
             Assert.IsTrue(!string.IsNullOrWhiteSpace(dto.Token), "usuario no se pudo loguear verfificar login");

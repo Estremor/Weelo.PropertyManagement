@@ -23,12 +23,12 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Methods
-        public async Task<RequestResultType> SaveImageAsync(PropertyImage image)
+        public async Task<ActionResult> SaveImageAsync(PropertyImage image)
         {
             var propertyResult = _propertyRepo.Entity.Find(image.IdProperty);
-            if (propertyResult == null) return RequestResultType.ErrorResul;
+            if (propertyResult == null) return new ActionResult { IsSuccessful = false, ErrorMessage = "No existe una propiedad con el identificador enviado" };
             await _imageRepo.InsertAsync(image);
-            return RequestResultType.SuccessResult;
+            return new ActionResult { IsSuccessful = true };
         }
         #endregion
     }

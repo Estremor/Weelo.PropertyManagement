@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
@@ -50,21 +51,19 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         {
             Property property = _mapper.Map<Property>(propertyDto);
             property.IdOwner = _ownerRepo.Entity.FirstOrDefault(o => o.Document == propertyDto.OwnerDocument)?.IdOwner ?? Guid.Empty;
-            property = await _propertyDomainServ.SaveAsync(property);
-            if (property == null)
-            {
-                throw new RestException(System.Net.HttpStatusCode.AlreadyReported, new { Messages = "Ocurrio un error al guardar las propiedad intentalo nuevamente" });
-            }
+            ActionResult propertyResult = await _propertyDomainServ.SaveAsync(property);
+            if (!propertyResult.IsSuccessful)
+                throw new RestException(HttpStatusCode.AlreadyReported, new { Messages = propertyResult.ErrorMessage });
 
             //registramos las imagenes
             List<PropertyImage> images = _mapper.Map<List<PropertyImage>>(propertyDto.PropertyImages);
             foreach (PropertyImage item in images)
             {
                 item.IdProperty = property.IdProperty;
-                RequestResultType result = await _propertyImageDomainServ.SaveImageAsync(item);
-                if (result == RequestResultType.ErrorResul)
+                ActionResult result = await _propertyImageDomainServ.SaveImageAsync(item);
+                if (!result.IsSuccessful)
                 {
-                    throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error al guardar las imagenes intentalo nuevamente" });
+                    throw new RestException(HttpStatusCode.InternalServerError, new { Messages = result.ErrorMessage });
                 }
             }
             await Context.SaveChangesAsync();
@@ -74,35 +73,28 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
             //mapeamos la entidad property y buscamos el id
             Property property = _mapper.Map<Property>(traceDto);
             property.IdOwner = _ownerRepo.List(x => x.Document == traceDto.OwnerDocument).FirstOrDefault()?.IdOwner ?? Guid.Empty;
-            property = await _propertyDomainServ.UpdatePropertyAsync(property);
-            if (property is null)
-            {
-                throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error al actualizar la propiedad, intentalo nuevamente" });
-            }
+            var propertyResult = await _propertyDomainServ.UpdatePropertyAsync(property);
+
+            if (!propertyResult.IsSuccessful)
+                throw new RestException(HttpStatusCode.InternalServerError, new { Messages = propertyResult.ErrorMessage });
 
             //aseguramos que el owner exista
             PropertyTrace propertyTrace = _mapper.Map<PropertyTrace>(traceDto);
-            propertyTrace.IdProperty = property.IdProperty;
+            propertyTrace.IdProperty = ((Property)propertyResult.Result).IdProperty;
             propertyTrace.Name = _ownerRepo.Entity.Find(property.IdOwner)?.Name ?? string.Empty;
 
             if (string.IsNullOrWhiteSpace(propertyTrace.Name))
-            {
-                throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = "No se encontro el Owner ingresado" });
-            }
+                throw new RestException(HttpStatusCode.NotFound, new { Messages = "No se encontro el Owner ingresado" });
 
             var result = _traceDomain.RegisterTrace(propertyTrace);
-            if (result == RequestResultType.ErrorResul)
-            {
-                throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = "Ocurrio un error al realizar la actualizacion" });
-            }
 
             await Context.SaveChangesAsync();
         }
         public async Task UpdatePriceAsync(PriceDto priceDto)
         {
             var result = await _propertyDomainServ.UpdatePriceAsync(new Property { CodeInternal = priceDto.InernalCode, Price = priceDto.Price });
-            if (result == RequestResultType.ErrorResul)
-                throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = $"Ocurrio un error al realizar la actualizacion del precio, el codigo {priceDto.InernalCode} no existe" });
+            if (!result.IsSuccessful)
+                throw new RestException(HttpStatusCode.NotFound, new { Messages = result.ErrorMessage });
             await Context.SaveChangesAsync();
         }
 

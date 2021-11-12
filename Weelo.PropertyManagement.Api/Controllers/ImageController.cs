@@ -27,9 +27,10 @@ namespace Weelo.PropertyManagement.Api.Controllers
         [HttpPost]
         [Authorize]
         [CustomValidation]
-        public async Task Post(ImageDto image)
+        public async Task<IActionResult> Post(ImageDto image)
         {
             await _imageAppService.AddImgeToPropertyAsync(image);
+            return Ok();
         }
         #endregion
     }

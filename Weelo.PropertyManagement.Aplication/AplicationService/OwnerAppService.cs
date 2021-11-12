@@ -31,13 +31,11 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         {
             Owner owner = _mapper.Map<Owner>(ownerDto);
             var result = await _ownerDomainService.SaveAsync(owner);
+            if (!result.IsSuccessful)
+                throw new RestException(System.Net.HttpStatusCode.AlreadyReported, new { Messages = result.ErrorMessage });
 
-            if (result == RequestResultType.AlreadyExistObjectResult)
-                throw new RestException(System.Net.HttpStatusCode.AlreadyReported, new { Messages = "Propietario ya existe" });
-            if (result == RequestResultType.ErrorResul)
-                throw new RestException(System.Net.HttpStatusCode.InternalServerError, new { Messages = "Ocurrio un error intentalo nuevamente" });
             await Context.SaveChangesAsync();
-        } 
+        }
         #endregion
     }
 }

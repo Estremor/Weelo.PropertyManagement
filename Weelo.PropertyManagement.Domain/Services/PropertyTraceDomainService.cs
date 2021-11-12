@@ -1,6 +1,5 @@
 ﻿using Weelo.PropertyManagement.Domain.Base;
 using Weelo.PropertyManagement.Domain.Entities;
-using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
 
@@ -22,17 +21,17 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Method
-        public RequestResultType RegisterTrace(PropertyTrace trace)
+        public ActionResult RegisterTrace(PropertyTrace trace)
         {
             if (_propertyRepo.Entity.Find(trace.IdProperty) != null)
             {
                 if (!string.IsNullOrWhiteSpace(trace.Name))
                 {
                     _repository.Insert(trace);
-                    return RequestResultType.SuccessResult;
+                    return new ActionResult { IsSuccessful = true };
                 }
             }
-            return RequestResultType.ErrorResul;
+            return new ActionResult { IsSuccessful = false, ErrorMessage = "No existe una propiedad con el identificador enviado" };
         }
         #endregion
     }

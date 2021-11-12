@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System.Net;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 using Weelo.PropertyManagement.Aplication.Dtos;
 using Weelo.PropertyManagement.Aplication.Errors;
@@ -25,16 +25,17 @@ namespace Weelo.PropertyManagement.Aplication.AplicationService
         #region Methods
         public async Task<UserDto> LoginUserAsync(string userName, string password)
         {
-            User userResult = await _loginDomainService.FindUserAsync(new User { UserName = userName, Password = password });
-            if (userResult is not null)
+            ActionResult userResult = await _loginDomainService.FindUserAsync(new User { UserName = userName, Password = password });
+            if (userResult.IsSuccessful)
             {
+                var user = (User)userResult.Result;
                 return new UserDto
                 {
-                    UserName = userResult.UserName,
-                    Token = _loginDomainService.CreateToken(userResult)
+                    UserName = user.UserName,
+                    Token = _loginDomainService.CreateToken(user)
                 };
             }
-            throw new RestException(System.Net.HttpStatusCode.NotFound, new { Messages = "Usuario no encontrado" });
+            throw new RestException(HttpStatusCode.NotFound, new { Messages = userResult.ErrorMessage });
         }
         #endregion
     }

@@ -25,24 +25,24 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Method
-        public async Task<Property> SaveAsync(Property property)
+        public async Task<ActionResult> SaveAsync(Property property)
         {
             ICollection<Property> entityResult = _propertyRepo.List(p => p.CodeInternal.Equals(property.CodeInternal));
             if (entityResult is not null && entityResult.Count > 0)
             {
-                return null;
+                return new ActionResult { IsSuccessful = false, ErrorMessage = "Ya se encuentra una propiedad registrada con el cogigo interno enviado" };
             }
             ICollection<Owner> ownerResult = _ownerRepo.List(o => o.IdOwner == property.IdOwner);
             if (ownerResult is null || ownerResult.Count == 0)
             {
-                return null;
+                return new ActionResult { IsSuccessful = false, ErrorMessage = "No existe un owner con el identificador enviado" };
             }
             property.IdOwner = ownerResult.First().IdOwner;
             Property resultSave = await _propertyRepo.InsertAsync(property);
-            return resultSave;
+            return new ActionResult { IsSuccessful = true, Result = resultSave };
         }
 
-        public async Task<Property> UpdatePropertyAsync(Property property)
+        public async Task<ActionResult> UpdatePropertyAsync(Property property)
         {
             var propertyEnity = _propertyRepo.List(x => x.CodeInternal == property.CodeInternal);
             if (propertyEnity is not null && propertyEnity.Count > 0)
@@ -56,22 +56,23 @@ namespace Weelo.PropertyManagement.Domain.Services
                     propertyUp.Price = property.Price;
                     propertyUp.Year = property.Year;
                     propertyUp = await _propertyRepo.UpdateAsync(propertyUp);
-                    return propertyUp;
+                    return new ActionResult { IsSuccessful = true, Result = propertyUp };
                 }
+                return new ActionResult { IsSuccessful = false, ErrorMessage = "No existe un owner con el identificador enviado" };
             }
-            return null;
+            return new ActionResult { IsSuccessful = false, ErrorMessage = "Ya se encuentra una propiedad registrada con el cogigo interno enviado" };
         }
-        public async Task<RequestResultType> UpdatePriceAsync(Property property)
+        public async Task<ActionResult> UpdatePriceAsync(Property property)
         {
             var prop = _propertyRepo.List(x => x.CodeInternal == property.CodeInternal);
             if (prop == null || prop.Count == 0)
-                return RequestResultType.ErrorResul;
+                return new ActionResult { Result = false, ErrorMessage = "No existe una propiedad con el identificador enviado" };
 
             Property propertyForUpdate = prop.FirstOrDefault();
             propertyForUpdate.Price = property.Price;
             await _propertyRepo.UpdateAsync(propertyForUpdate);
 
-            return RequestResultType.SuccessResult;
+            return new ActionResult { IsSuccessful = true };
         }
         #endregion
     }

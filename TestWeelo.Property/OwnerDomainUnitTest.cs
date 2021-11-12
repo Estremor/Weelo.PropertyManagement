@@ -6,9 +6,11 @@ using Weelo.PropertyManagement.Domain.Services;
 using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.IRepository;
+using Weelo.PropertyManagement.Domain.Base;
 
 namespace TestWeelo.Property
 {
+    [TestFixture]
     public class OwnerDomainUnitTest
     {
         [SetUp]
@@ -26,9 +28,9 @@ namespace TestWeelo.Property
             mockDomainservice.Setup(sp => sp.List(x => x.Document == owner.Document)).Returns(new List<Owner>());
 
             OwnerDomainService service = new(mockDomainservice.Object);
-            RequestResultType result = await service.SaveAsync(owner);
+            ActionResult result = await service.SaveAsync(owner);
 
-            Assert.IsTrue(result == RequestResultType.SuccessResult);
+            Assert.IsTrue(result.IsSuccessful);
         }
 
         [Test]
@@ -41,9 +43,9 @@ namespace TestWeelo.Property
             mockDomainservice.Setup(sp => sp.List(x => x.Document == owner.Document)).Returns(new List<Owner>() { new Owner { Document = owner.Document } });
 
             OwnerDomainService service = new(mockDomainservice.Object);
-            RequestResultType result = await service.SaveAsync(owner);
+            ActionResult result = await service.SaveAsync(owner);
 
-            Assert.IsTrue(result == RequestResultType.AlreadyExistObjectResult);
+            Assert.IsTrue(!result.IsSuccessful);
         }
     }
 }

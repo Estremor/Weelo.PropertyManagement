@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using Weelo.PropertyManagement.Domain.Services;
 using Weelo.PropertyManagement.Domain.IRepository;
 using entity = Weelo.PropertyManagement.Domain.Entities;
-using Weelo.PropertyManagement.Domain.Base.Enum;
 
 namespace TestWeelo.Property
 {
+    [TestFixture]
     public class PropertyDomainUnitTest
     {
         [SetUp]
@@ -31,7 +31,7 @@ namespace TestWeelo.Property
             PropertyDomainService service = new(mockDomainservice.Object, mockOwner.Object);
             var result = await service.SaveAsync(property);
 
-            Assert.IsTrue(result != null, "Ocurrio un error al guaradar property");
+            Assert.IsTrue(result.IsSuccessful, "Ocurrio un error al guaradar property");
         }
 
         [Test]
@@ -46,9 +46,9 @@ namespace TestWeelo.Property
             mockOwner.Setup(sp => sp.List(x => x.IdOwner == property.IdOwner)).Returns(new List<entity.Owner> { });
 
             PropertyDomainService service = new(mockDomainservice.Object, mockOwner.Object);
-            entity.Property result = await service.SaveAsync(property);
+            var result = await service.SaveAsync(property);
 
-            Assert.IsTrue(result == null, "Ocurrio un error al guaradar property");
+            Assert.IsTrue(!result.IsSuccessful, "Ocurrio un error al guaradar property");
         }
 
         [Test]
@@ -63,9 +63,9 @@ namespace TestWeelo.Property
             mockProperty.Setup(pr => pr.UpdateAsync(property));
 
             PropertyDomainService service = new(mockProperty.Object, mockOwner.Object);
-            entity.Property result = await service.UpdatePropertyAsync(property);
+            var result = await service.UpdatePropertyAsync(property);
 
-            Assert.IsTrue(result == null, "Ocurrio un error,  property fue Actualizada");
+            Assert.IsTrue(!result.IsSuccessful, "Ocurrio un error,  property fue Actualizada");
         }
 
 
@@ -82,7 +82,7 @@ namespace TestWeelo.Property
             PropertyDomainService service = new(mockDomainservice.Object, mockOwner.Object);
             var result = await service.UpdatePriceAsync(property);
 
-            Assert.IsTrue(result == RequestResultType.SuccessResult, "Ocurrio un error al guaradar property");
+            Assert.IsTrue(result.IsSuccessful, "Ocurrio un error al guaradar property");
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace TestWeelo.Property
             PropertyDomainService service = new(mockDomainservice.Object, mockOwner.Object);
             var result = await service.UpdatePriceAsync(property);
 
-            Assert.IsTrue(result != RequestResultType.SuccessResult, "Ocurrio un error se actualizo el precio");
+            Assert.IsTrue(!result.IsSuccessful, "Ocurrio un error se actualizo el precio");
         }
     }
 }

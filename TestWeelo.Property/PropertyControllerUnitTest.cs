@@ -8,6 +8,7 @@ using Weelo.PropertyManagement.Aplication.AplicationService.Contract;
 
 namespace TestWeelo.Property
 {
+    [TestFixture]
     public class PropertyControllerUnitTest
     {
         [SetUp]

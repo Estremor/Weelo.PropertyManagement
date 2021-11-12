@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Weelo.PropertyManagement.Domain.Base;
-using Weelo.PropertyManagement.Domain.Base.Enum;
 using Weelo.PropertyManagement.Domain.Entities;
 using Weelo.PropertyManagement.Domain.IRepository;
 using Weelo.PropertyManagement.Domain.Services.Contracts;
@@ -22,14 +20,14 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Methods
-        public async Task<RequestResultType> SaveAsync(Owner owner)
+        public async Task<ActionResult> SaveAsync(Owner owner)
         {
             if (_ownerRepo.List(x => x.Document == owner.Document).Count <= 0)
             {
                 Owner ownerResult = await _ownerRepo.InsertAsync(owner);
-                return RequestResultType.SuccessResult;
+                return new ActionResult { IsSuccessful = true };
             }
-            return RequestResultType.AlreadyExistObjectResult;
+            return new ActionResult { IsSuccessful = false, ErrorMessage = "ya se registro un owner con ese documento" };
         }
         #endregion
     }

@@ -36,10 +36,12 @@ namespace Weelo.PropertyManagement.Aplication.Automapper
 
             #region PropertyImage
             CreateMap<PropertyImage, Image>()
-                .ForMember(x => x.File, src => src.MapFrom(d => d.File == null ? string.Empty : Convert.ToBase64String(d.File)));
+                .ForMember(x => x.File, src => src.MapFrom(d => d.File == null ? string.Empty : Convert.ToBase64String(d.File)))
+            .ForMember(x => x.Enabled, src => src.MapFrom(d => d.Enabled));
 
             CreateMap<Image, PropertyImage>()
-                .ForMember(x => x.File, src => src.MapFrom(d => string.IsNullOrWhiteSpace(d.File) ? null : Convert.FromBase64String(d.File)));
+                .ForMember(x => x.File, src => src.MapFrom(d => string.IsNullOrWhiteSpace(d.File) ? null : Convert.FromBase64String(d.File)))
+                .ForMember(x => x.Enabled, src => src.MapFrom(d => d.Enabled));
             #endregion
 
             #region Image

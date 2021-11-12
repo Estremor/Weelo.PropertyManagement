@@ -28,10 +28,10 @@ namespace Weelo.PropertyManagement.Domain.Services
         #endregion
 
         #region Methods
-        public async Task<User> FindUserAsync(User user)
+        public async Task<ActionResult> FindUserAsync(User user)
         {
             var userEntity = await _userRepository.ListAsync(x => x.UserName == user.UserName && x.Password == user.Password);
-            return userEntity.FirstOrDefault();
+            return new ActionResult { IsSuccessful = true, Result = userEntity.FirstOrDefault() };
         }
 
         public string CreateToken(User user)
