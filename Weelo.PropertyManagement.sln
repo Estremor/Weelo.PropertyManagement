@@ -31,7 +31,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Model", "Model\Model.sqlpro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostMan Test", "PostMan Test", "{3BA28883-9E95-4BFA-B79C-C976239EEF34}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\Users\Alexextremor\OneDrive\Escritorio\Weelo api test.postman_collection.json = ..\..\Users\Alexextremor\OneDrive\Escritorio\Weelo api test.postman_collection.json
+		..\..\Escritorio\Weelo api test.postman_collection.json = ..\..\Escritorio\Weelo api test.postman_collection.json
 	EndProjectSection
 EndProject
 Global

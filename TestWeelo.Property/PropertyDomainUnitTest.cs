@@ -57,7 +57,7 @@ namespace TestWeelo.Property
             string propertyStringt = "{\"IdProperty\":\"3037AC77-2178-474D-3E6C-08D9A1B640E5\",  \"name\": \"Word Trade center\",  \"address\": \"carrera 90 bis #83c - 28\",  \"price\": 556.0,  \"CodeInternal\": \"54455545\",  \"Year\": 1995,  \"IdOwner\": \"2E0C9824-C9F4-4F50-3F61-08D9A1B43A87\"}";
             entity.Property property = Newtonsoft.Json.JsonConvert.DeserializeObject<entity.Property>(propertyStringt);
             Mock<IRepository<entity.Owner>> mockOwner = new();
-            mockOwner.Setup(or => or.Entity.Find(property.IdOwner)).Returns(new entity.Owner { });
+            mockOwner.Setup(or => or.Entity.Find(property.IdOwner));
             Mock<IRepository<entity.Property>> mockProperty = new();
             mockProperty.Setup(pr => pr.List(x => x.CodeInternal == property.CodeInternal)).Returns(new List<entity.Property>() { new entity.Property { } });
             mockProperty.Setup(pr => pr.UpdateAsync(property));
