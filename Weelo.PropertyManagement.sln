@@ -29,11 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWeelo.Property", "TestW
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Model", "Model\Model.sqlproj", "{2D580680-57B1-4EAD-B4B3-BFE9376897D2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostMan Test", "PostMan Test", "{3BA28883-9E95-4BFA-B79C-C976239EEF34}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Escritorio\Weelo api test.postman_collection.json = ..\..\Escritorio\Weelo api test.postman_collection.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,7 +76,6 @@ Global
 		{0E22842E-24D5-458E-92D8-F8DD0C0D19FE} = {72E63D38-E88B-40B6-8B63-DD78C49B79F6}
 		{46AC0DDB-3A2B-4549-8705-827213FEF714} = {17D7EEB8-1EA7-49A3-8B33-1134203F1012}
 		{2D580680-57B1-4EAD-B4B3-BFE9376897D2} = {A9F2E2F3-C14B-4C10-B526-64D9C655BB6F}
-		{3BA28883-9E95-4BFA-B79C-C976239EEF34} = {17D7EEB8-1EA7-49A3-8B33-1134203F1012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BAC73F5-8C79-41A0-8DCD-DC47CD4BDB0F}
