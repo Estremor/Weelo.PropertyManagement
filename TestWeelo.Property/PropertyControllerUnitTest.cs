@@ -27,7 +27,7 @@ namespace TestWeelo.Property
             PropertyController controller = new PropertyController(mock.Object);
             var dto = await controller.Post(property);
 
-            Assert.IsTrue(((ObjectResult)dto).StatusCode == 200, "Propiedad no se pudo insertar");
+            Assert.IsTrue(((StatusCodeResult)dto).StatusCode == 200, "Propiedad no se pudo insertar");
         }
 
         [Test]
